@@ -1,11 +1,3 @@
-from sanic import Sanic
-from sanic.response import json
+import urequests
 
-app = Sanic(__name__)
-
-@app.route("/hi")
-async def hello(request):
-    return json({"message": "Hello, world!"})
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+urequests.get('IP/set/id/1/1/red')
