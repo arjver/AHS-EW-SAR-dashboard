@@ -1,71 +1,7 @@
 from sanic import Sanic
 from sanic.response import html, json, text
 
-
-page = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pico Car Grid</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            padding: 0;
-            width: 80vmin;
-            height: 80vmin;
-            margin: auto;
-        }
-        td {
-            width: calc(100% / __height__);
-            height: calc(100% / __width__);
-            background-color: #eee;
-            border: 1px solid #000;
-        }
-        td[red] {
-            background-color: #f00;
-        }
-        td[green] {
-            background-color: #0f0;
-        }
-        td[blue] {
-            background-color: #00f;
-        }
-        td[yellow] {
-            background-color: #ff0;
-        }
-        td[cyan] {
-            background-color: #0ff;
-        }
-        td[magenta] {
-            background-color: #f0f;
-        }
-        td[magnet] {
-            box-shadow: inset 0 0 0 25px #eee;    
-            background-color: #555;
-        }
-        div {
-            text-align: center;
-            margin-top: 1em;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-        }
-    </style>
-</head>
-<body>
-    <table>
-        __table__
-    </table>
-    <div>
-        Your group ID is: <b>__id__</b>
-        <br>
-    </div>
-</body>
-</html>
-"""
-
-
+page = open("page.html").read()
 
 data: dict[str, list[list[str]]] = {
     "test": [
@@ -76,6 +12,9 @@ data: dict[str, list[list[str]]] = {
             ["green", "blue", "yellow", "cyan", "red"],
          ],
 }
+
+
+
 
 def make_grid(id: str):
     arr = data[id]
