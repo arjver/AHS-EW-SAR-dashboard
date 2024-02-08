@@ -1,20 +1,23 @@
 from sanic import Sanic
 from sanic.response import html, json, text
+import json
 
 page = open("page.html").read()
 
-data: dict[str, list[list[str]]] = {
-    "test": [
-            ["", "", "magnet", "yellow", "cyan"],
-            ["", "red", "green", "blue", "yellow"],
-            ["", "cyan", "red", "green", "blue"],
-            ["blue", "yellow", "cyan", "red", "green"],
-            ["green", "blue", "yellow", "cyan", "red"],
-         ],
-}
+data: dict[str, list[list[str]]] = {}
 
+def save_data(file_path: str = "data.json"):
+    global data
+    with open(file_path, 'w') as file:
+        json.dump(data, file)
 
+def load_data(file_path: str = "data.json") -> dict:
+    global data
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    return data
 
+load_data()
 
 def make_grid(id: str):
     arr = data[id]
@@ -37,6 +40,15 @@ def make_grid(id: str):
             )
 
 app = Sanic(__name__)
+
+@app.route("/")
+async def index(req):
+    return html(
+        """
+        <!DOCTYPE html>
+        
+        """
+    )
 
 @app.get("/view/<id>")
 async def main(req, id: str):
@@ -61,4 +73,4 @@ async def set_one(req, id: str, x: int, y: int, to: str):
         return json({"status": "error", "message": "Invalid X or Y"}, status=400)
     
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
