@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Webpage</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="textInput" placeholder="Enter text here" />
+      <button id="submitButton">Submit</button>
+    </div>
+
+    <script>
+      const textInput = document.getElementById("textInput");
+      const submitButton = document.getElementById("submitButton");
+
+      submitButton.addEventListener("click", function () {
+        const text = textInput.value;
+        if (text) {
+          window.location.href = "/view/" + encodeURIComponent(text);
+        }
+      });
+    </script>
+  </body>
+</html>

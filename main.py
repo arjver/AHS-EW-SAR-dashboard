@@ -1,20 +1,20 @@
 from sanic import Sanic
 from sanic.response import html, json, text
-import json
+import json as j
 
-page = open("page.html").read()
+page = open("viewgrid.html").read()
 
 data: dict[str, list[list[str]]] = {}
 
 def save_data(file_path: str = "data.json"):
     global data
     with open(file_path, 'w') as file:
-        json.dump(data, file)
+        j.dump(data, file)
 
 def load_data(file_path: str = "data.json") -> dict:
     global data
     with open(file_path, 'r') as file:
-        data = json.load(file)
+        data = j.load(file)
     return data
 
 load_data()
@@ -43,34 +43,37 @@ app = Sanic(__name__)
 
 @app.route("/")
 async def index(req):
-    return html(
-        """
-        <!DOCTYPE html>
-        
-        """
-    )
+    return html(open("enterid.html").read())
 
 @app.get("/view/<id>")
 async def main(req, id: str):
     try:
         return html(make_grid(id))
     except KeyError:
-        return text("Invalid ID '" + id + "'", status=400)
+        return text("Unknown ID '" + id + "'", status=400)
 
 @app.route("/set/<id>/<x>/<y>/<to>")
 async def set_one(req, id: str, x: int, y: int, to: str):
-    if to not in ["red", "green", "blue", "yellow", "cyan", "magenta", "none", "magnet"]:
+    if to not in ["red", "green", "blue", "yellow", "cyan", "magenta", "none", "magnet", "grey"]:
         return json({"status": "error", "message": "Invalid color"}, status=400)
 
     to = to if to != "none" else ""
 
     try:
+
         data[id][y][x] = to
         return json({"status": "ok"})
     except KeyError:
         return json({"status": "error", "message": "Invalid ID '" + id + "'"}, status=400)
     except IndexError:
         return json({"status": "error", "message": "Invalid X or Y"}, status=400)
+    
+@app.route("/init/<id>/<height>/<width>")
+async def init(req, id: str, height: int, width: int):
+    global data
+    data[id] = [["" for _ in range(width)] for _ in range(height)]
+    save_data()
+    return json({"status": "ok"})
     
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
