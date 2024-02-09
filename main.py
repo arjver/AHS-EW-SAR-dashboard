@@ -76,4 +76,4 @@ async def init(req, id: str, height: int, width: int):
     return json({"status": "ok"})
     
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
+    app.run(host="0.0.0.0", port=3010, debug=True, auto_reload=True)
