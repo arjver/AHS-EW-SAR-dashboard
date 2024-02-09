@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple Webpage</title>
+    <title>Search and Report Web Dashboard</title>
     <style>
       .container {
         display: flex;
@@ -11,22 +11,69 @@
         width: 100%;
         height: 100vh;
       }
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+      h1 {
+        font-family: monospace;
+      }
+      small {
+        padding-top: 10px;
+        font-family: sans-serif;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <input type="text" id="textInput" placeholder="Enter text here" />
-      <button id="submitButton">Submit</button>
+      <h1>Search and Report* Web Dashboard</h1>
+      <input type="text" placeholder="Enter your ID here" />
+      <button>View Grid</button>
+      <small>
+        *We're not actually "rescue"ing so it should be report or something...
+      </small>
     </div>
 
     <script>
-      const textInput = document.getElementById("textInput");
-      const submitButton = document.getElementById("submitButton");
+      const textInput = document.querySelector("input");
+      const submitButton = document.querySelector("button");
 
       submitButton.addEventListener("click", function () {
         const text = textInput.value;
         if (text) {
           window.location.href = "/view/" + encodeURIComponent(text);
+        }
+      });
+
+      textInput.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+          submitButton.click();
         }
       });
     </script>
