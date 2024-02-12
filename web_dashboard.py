@@ -16,7 +16,7 @@ wd.log("Hello, world!")
 
 import socket
 
-SERVER_ADDRESS = ("0.0.0.0", 3020)
+SERVER_ADDRESS = ("34.105.82.19", 3020)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(SERVER_ADDRESS)
@@ -45,7 +45,7 @@ def set_square(x: int, y: int, color: str):
 
     data = sock.recv(1024)
 
-    if data != b'{"status": "ok"}':
+    if not (str(data, "utf-8").find("error") == -1):
         raise ValueError(str(data, "utf-8"))
 
 
