@@ -5,8 +5,9 @@ import threading
 web_server_url = "http://localhost:3010"
 port = 3020
 
+
 def handle_client(client_socket):
-    print('client connected')
+    print("client connected")
 
     while True:
         try:
@@ -14,21 +15,23 @@ def handle_client(client_socket):
             if not data:
                 break
             msg = data.decode()
-            client_socket.sendall(bytes(requests.get(web_server_url + "/" + msg).text, "utf-8"))
+            requests.get(web_server_url + "/" + msg)
+            # client_socket.sendall(bytes(requests.get(web_server_url + "/" + msg).text, "utf-8"))
         except Exception as e:
             print(e)
             break
 
-    print('client disconnected')
+    print("client disconnected")
     client_socket.close()
+
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-server_address = ('0.0.0.0', 3020)
+server_address = ("0.0.0.0", 3020)
 server_socket.bind(server_address)
 
-print(f'listening on port {port}')
+print(f"listening on port {port}")
 
 server_socket.listen(1)
 
