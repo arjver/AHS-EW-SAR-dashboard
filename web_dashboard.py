@@ -9,6 +9,7 @@ wd.id = "<your id>"
 wd.init_grid(10)
 wd.init_log()
 wd.set_square(0, 0, "red")
+wd.set_square(1, 1, "green")
 wd.log("Hello, world!")
 ```
 """
@@ -43,7 +44,9 @@ def set_square(x: int, y: int, color: str):
     sock.sendall(message)
 
     data = sock.recv(1024)
-    # TODO error handle
+
+    if data != b'{"status": "ok"}':
+        raise ValueError(str(data, "utf-8"))
 
 
 def init_grid(grid_size: int):
@@ -51,20 +54,17 @@ def init_grid(grid_size: int):
     sock.sendall(message)
 
     data = sock.recv(1024)
-    # TODO error handle
 
 
 def init_log():
-    message = f"initlog/{id}".encode()
+    message = f"initlog/{id}_log".encode()
     sock.sendall(message)
 
     data = sock.recv(1024)
-    # TODO error handle
 
 
 def log(msg: str):
-    message = f"log/{id}/{msg}".encode()
+    message = f"log/{id}_log/{msg}".encode()
     sock.sendall(message)
 
     data = sock.recv(1024)
-    # TODO error handle

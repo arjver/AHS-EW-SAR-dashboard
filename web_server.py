@@ -118,7 +118,7 @@ async def initlog(req, id: str):
     data[id] = [
         [
             f"{datetime.now()}",
-            f"Logging initialized on id {id}",  # Note: this text decides if it's a log or not
+            f"Logging initialized on id {id.replace('_log', '')}",  # Note: this text decides if it's a log or not
         ]
     ]
     save_data()

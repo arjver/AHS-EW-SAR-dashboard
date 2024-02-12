@@ -54,7 +54,8 @@
     <div class="container">
       <h1>Search and Report* Web Dashboard</h1>
       <input type="text" placeholder="Enter your ID here" />
-      <button>View Grid</button>
+      <button id="gridbutton">View Grid</button>
+      <button id="logbutton">View Log</button>
       <small>
         *We're not actually "rescue"ing so it should be report or something...
       </small>
@@ -62,18 +63,26 @@
 
     <script>
       const textInput = document.querySelector("input");
-      const submitButton = document.querySelector("button");
+      const gridButton = document.querySelector("#gridbutton");
+      const logButton = document.querySelector("#logbutton");
 
-      submitButton.addEventListener("click", function () {
+      gridButton.addEventListener("click", function () {
         const text = textInput.value;
         if (text) {
           window.location.href = "/view/" + encodeURIComponent(text);
         }
       });
 
+      logButton.addEventListener("click", function () {
+        const text = textInput.value;
+        if (text) {
+          window.location.href = "/view/" + encodeURIComponent(text) + "_log";
+        }
+      });
+
       textInput.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
-          submitButton.click();
+          gridButton.click();
         }
       });
     </script>
