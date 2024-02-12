@@ -1,16 +1,17 @@
-# import socket
+"""
+Send stuff to the web dashboard.
 
-# sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+Example:
+```
+import web_dashboard as wd
 
-# server_address = ('0.0.0.0', 3020)
-# sock.connect(server_address)
-
-# while ...:
-#     message = b'set/test/0/0/green'
-#     sock.sendall(message)
-
-#     data = sock.recv(1024)
-#     print('Received data:', data.decode())
+wd.id = "<your id>"
+wd.init_grid(10)
+wd.init_log()
+wd.set_square(0, 0, "red")
+wd.log("Hello, world!")
+```
+"""
 
 import socket
 
@@ -53,7 +54,17 @@ def init_grid(grid_size: int):
     # TODO error handle
 
 
-id = "test1"
-init_grid(10)
-set_square(0, 0, "red")
-set_square(0, 1, "green")
+def init_log():
+    message = f"initlog/{id}".encode()
+    sock.sendall(message)
+
+    data = sock.recv(1024)
+    # TODO error handle
+
+
+def log(msg: str):
+    message = f"log/{id}/{msg}".encode()
+    sock.sendall(message)
+
+    data = sock.recv(1024)
+    # TODO error handle
