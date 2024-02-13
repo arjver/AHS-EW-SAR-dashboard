@@ -1,11 +1,11 @@
 import web_dashboard as wd
+import random
 
-wd.id = "test5"
+wd.id = input("ID: ")
 wd.init_grid(10)
 wd.init_log()
-# wd.set_square(0, 0, "red")
-# wd.set_square(1, 1, "green")
-# wd.log("Hello, 123")
 
 while ...:
-    wd.log(input("> "))
+    # wd.log(str(random.random())) # stress test
+    # wd.log(input("> ")) # send from REPL test
+    ...
