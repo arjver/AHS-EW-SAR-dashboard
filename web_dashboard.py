@@ -16,7 +16,8 @@ wd.log("Hello, world!")
 
 import socket
 
-SERVER_ADDRESS = ("34.105.82.19", 3020)
+# SERVER_ADDRESS = ("34.105.82.19", 3020)
+SERVER_ADDRESS = ("0.0.0.0", 3020)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(SERVER_ADDRESS)

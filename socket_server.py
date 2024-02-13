@@ -15,7 +15,7 @@ def handle_client(client_socket):
             if not data:
                 break
             msg = data.decode()
-            print(msg)
+            print(111, msg)
             requests.get(web_server_url + "/" + msg)
             # client_socket.sendall(bytes(requests.get(web_server_url + "/" + msg).text, "utf-8"))
         except Exception as e:
