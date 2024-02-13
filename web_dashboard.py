@@ -43,28 +43,28 @@ def set_square(x: int, y: int, color: str):
     message = f"set/{id}/{x}/{y}/{color}".encode()
     sock.sendall(message)
 
-    data = sock.recv(1024)
+    # data = sock.recv(1024)
 
-    if not (str(data, "utf-8").find("error") == -1):
-        raise ValueError(str(data, "utf-8"))
+    # if not (str(data, "utf-8").find("error") == -1):
+    #     raise ValueError(str(data, "utf-8"))
 
 
 def init_grid(grid_size: int):
     message = f"init/{id}/{grid_size}/{grid_size}".encode()
     sock.sendall(message)
 
-    data = sock.recv(1024)
+    # data = sock.recv(1024)
 
 
 def init_log():
     message = f"initlog/{id}_log".encode()
     sock.sendall(message)
 
-    data = sock.recv(1024)
+    # data = sock.recv(1024)
 
 
 def log(msg: str):
     message = f"log/{id}_log/{msg}".encode()
     sock.sendall(message)
 
-    data = sock.recv(1024)
+    # data = sock.recv(1024)
