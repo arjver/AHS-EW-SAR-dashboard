@@ -22,7 +22,17 @@ Made by [@blobbybilb](https://github.com/blobbybilb)
 - The school randomly blocks domains (via DNS (but it seems some IPs are blocked at a different level?))
 - The school has several network, the rules are different for each (as I found out during 6th Period (AP CSA) 14.Feb.2024)
 - All the above statements may or may not be accurate, so please don't modify the setup unless needed. It's okay. Rewriting it in Rust won't make the network any faster. Well don't say I didn't warn you.
-- 
+- MicroPython doesn't support WPA2 Enterprise which is what the student wifi uses as of when I wrote this
+### The Setup:
+1. We have a wifi router connected to the modem connected to the port near the big TV in the computer lab side of the workshop. Connecting it to ethernet upstairs in Room 310 doesn't work (stricter TCP blocking or something).
+2. `pico-dashboard.deno.dev` proxies all HTTP requests to an HTTP server on a google cloud VM (I'll call this "HTTP server at port 3010" now)
+3. The google cloud VM also runs a socket server on port 3020 (`socket_server.py`) that acts as a proxy from TCP sockets to the HTTP server at port 3010.
+4. The HTTP server at port 3010 (`web_server.py`) does all the work.
+### Justification
+- Another wifi network because school wifi is bad for some reason inside the workshop (it works perfectly well right outside, and there is some kind of access point inside the workshop) (it might be a 2.3ghz/5ghz thing)
+- The HTTP server does everything because I wrote that first, hoping that'd be all that was needed. It wasn't.
+- TCP sockets are fast (and aren't blocked in specifically our current setup), so it wouldn't take too much time on the Pico.
+- The Deno Deploy proxy is because port 80 was in use on the gcloud VM, and other ports are blocked for HTTP (except 443 but good luck trying to get 40 students to make sure chrome/safari don't auto redirect that to https)
 
 
 ## Screenshots
