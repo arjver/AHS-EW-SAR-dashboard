@@ -34,6 +34,8 @@ Made by [@blobbybilb](https://github.com/blobbybilb)
 - TCP sockets are fast (and aren't blocked in specifically our current setup), so it wouldn't take too much time on the Pico.
 - The Deno Deploy proxy is because port 80 was in use on the gcloud VM, and other ports are blocked for HTTP (except 443 but good luck trying to get 40 students to make sure chrome/safari don't auto redirect that to https)
 
+**Note:** A setup too cursed to mention here might be available in some file on the super-heavy laptop in Room 310 to get a development setup in Room 310 (Room 310 is the actual CS room if that has changed).
+
 
 ## Screenshots
 
