@@ -34,7 +34,9 @@ server_socket.bind(server_address)
 
 print(f"listening on port {port}")
 
-server_socket.listen(1)
+server_socket.listen(
+    1
+)  # 1 connection, this might be a problem but it isn't working anyway
 
 while True:
     try:

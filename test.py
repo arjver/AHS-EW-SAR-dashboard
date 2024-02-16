@@ -1,25 +1,21 @@
-import random
+import socket
 
-# import network
+HOST = "127.0.0.1"  # IP address of your Elixir server
+PORT = 65432  # Port the Elixir server is listening on
 
-# wifi = network.WLAN(network.STA_IF)
-# wifi.active(True)
-# wifi.connect("electronics-workshop", "elecwork123")
 
-# while not wifi.isconnected():
-#     print(wifi.status())
+def test_connection():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
 
-import web_dashboard as wd
+        # Test data to send (adjust as needed)
+        data = b"Hello from Python!\n"
+        s.sendall(data)
 
-wd.id = input("ID: ")
-wd.init_grid(10)
-wd.init_log()
+        # Receive response (replace 1024 with appropriate buffer size)
+        response = s.recv(1024)
+        print(f"Received from Elixir server: {response.decode('utf-8')}")
 
-i = 0
-while ...:
-    # wd.log(str(random.random())) # stress test
-    i += 1
-    wd.log(str(i))
-    print(i)
-    # wd.log(input("> "))  # send from REPL test
-    ...
+
+if __name__ == "__main__":
+    test_connection()
