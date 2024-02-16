@@ -21,5 +21,4 @@ defmodule TCPServer do
   end 
 end
 
-# Start the server
 TCPServer.start_link()
