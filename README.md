@@ -36,8 +36,7 @@ Made by [@blobbybilb](https://github.com/blobbybilb)
 
 **Note:** A setup too cursed to mention here might be available in some file on the super-heavy Dell Xeon laptop in Room 310 to get a development setup in Room 310 (Room 310 is the actual CS room right now (in case that changes in the future)). (if it doesn't boot then select the 5.7.X kernel at boot, the 6.2.X kernel is corrupted)
 
-**Update:** We 
-
+**Update:** The above setup wasn't reliable, apparently due to the school's network policies. We are running everything locally on an SBC connected to the wifi network above. I also rewrote it (in Elixir) and removed all the hacky stuff (for reliability and to be sure it could easily handle all the picos/computers concurrently without performance issues on the relatively low-power SBC).
 
 ## Screenshots
 
