@@ -36,6 +36,8 @@ Made by [@blobbybilb](https://github.com/blobbybilb)
 
 **Note:** A setup too cursed to mention here might be available in some file on the super-heavy Dell Xeon laptop in Room 310 to get a development setup in Room 310 (Room 310 is the actual CS room right now (in case that changes in the future)). (if it doesn't boot then select the 5.7.X kernel at boot, the 6.2.X kernel is corrupted)
 
+**Update:** We 
+
 
 ## Screenshots
 
