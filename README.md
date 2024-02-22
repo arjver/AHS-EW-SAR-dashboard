@@ -38,6 +38,17 @@ Made by [@blobbybilb](https://github.com/blobbybilb)
 
 **Update:** The above setup wasn't reliable, apparently due to the school's network policies. We are running everything locally on an SBC connected to the wifi network above. I also rewrote it (in Elixir) and removed all the hacky stuff (for reliability and to be sure it could easily handle all the picos/computers concurrently without performance issues on the relatively low-power SBC).
 
+
+## Usage
+```sh
+# To run the new version:
+git clone https://github.com/blobbybilb/AHS-EW-SAR-dashboard
+# Make sure elixir and mix are installed
+mix deps.get
+iex -S mix
+# Now web_dashboard.py should be able to send stuff to the server
+```
+
 ## Screenshots
 
 ![image](https://github.com/blobbybilb/AHS_Electronics_pico_search_project_web_dashboard/assets/58201828/12c03934-407a-461c-b25b-2c1d57de6875)
