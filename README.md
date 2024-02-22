@@ -46,7 +46,7 @@ git clone https://github.com/blobbybilb/AHS-EW-SAR-dashboard
 # Make sure elixir and mix are installed
 mix deps.get
 iex -S mix
-# Now web_dashboard.py should be able to send stuff to the server
+# Now web_dashboard.py should be able to send stuff to the server (after you put in the correct server IP)
 ```
 
 ## Screenshots
