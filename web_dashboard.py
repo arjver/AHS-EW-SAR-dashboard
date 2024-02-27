@@ -17,11 +17,15 @@ wd.log("Hello, world!")
 import socket
 
 SERVER_ADDRESS = ("192.168.4.33", 3101)
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(SERVER_ADDRESS)
-
 id = ""
+sock = None
+
+def connect_web_server():
+    global sock
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect(SERVER_ADDRESS)
+
+
 
 # ("red" | "green" | "blue" | "yellow" | "cyan" | "magenta" | "none" | "magnet" | "grey")
 
@@ -56,9 +60,3 @@ def init_log():
 def log(msg: str):
     message = f"log/{id}/{msg}||".encode()
     sock.sendall(message)
-
-id = "test"
-init_grid(10)
-init_log()
-log("hi")
-set_square(1, 2, "blue")
