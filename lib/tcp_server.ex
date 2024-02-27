@@ -10,7 +10,7 @@ defmodule TCPServer do
         reuseaddr: true,
         ip: {0, 0, 0, 0}
       ])
-    IO.puts("Starting TCP server on port #{port}")
+    IO.puts("Starting TCP server on port #{@port}")
     accept_loop(listener)
   end
 
