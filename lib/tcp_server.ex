@@ -29,7 +29,6 @@ defmodule TCPServer do
 
         data |> String.split("||", trim: true) |> Enum.each(&do_action/1)
 
-        do_action(data)
         handle_connection(client)
 
       {:error, reason} ->
