@@ -26,6 +26,9 @@ defmodule TCPServer do
     case :gen_tcp.recv(client, 0) do
       {:ok, data} ->
         IO.puts("Received: #{inspect(data)}")
+
+        data |> String.split("||", trim: true) |> Enum.each(&do_action/1)
+
         do_action(data)
         handle_connection(client)
 
