@@ -16,7 +16,7 @@ wd.log("Hello, world!")
 
 import socket
 
-SERVER_ADDRESS = ("34.105.82.19", 3101)
+SERVER_ADDRESS = ("192.168.4.33", 3101)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(SERVER_ADDRESS)
@@ -39,20 +39,26 @@ def set_square(x: int, y: int, color: str):
     ]:
         raise ValueError("Invalid color")
 
-    message = f"set/{id}/{x}/{y}/{color}".encode()
+    message = f"set/{id}/{x}/{y}/{color}||".encode()
     sock.sendall(message)
 
 
 def init_grid(grid_size: int):
-    message = f"init/grid/{id}/{grid_size}/{grid_size}".encode()
+    message = f"init/grid/{id}/{grid_size}/{grid_size}||".encode()
     sock.sendall(message)
 
 
 def init_log():
-    message = f"init/logs/{id}".encode()
+    message = f"init/logs/{id}||".encode()
     sock.sendall(message)
 
 
 def log(msg: str):
-    message = f"log/{id}_log/{msg}".encode()
+    message = f"log/{id}/{msg}||".encode()
     sock.sendall(message)
+
+id = "test"
+init_grid(10)
+init_log()
+log("hi")
+set_square(1, 2, "blue")
