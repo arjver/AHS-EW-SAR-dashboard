@@ -21,7 +21,6 @@ defmodule DataStore do
       data |> Map.put("grid", replace_at_key)
     end)
 
-    persist_data()
   end
 
   def put(:log, key, value) do
@@ -30,8 +29,6 @@ defmodule DataStore do
       replace_at_key = log_data |> Map.put(key, value)
       data |> Map.put("log", replace_at_key)
     end)
-
-    persist_data()
   end
 
   def init_grid(id, height, width) do
