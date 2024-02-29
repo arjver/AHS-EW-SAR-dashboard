@@ -66,7 +66,7 @@ defmodule DataStore do
     end
   end
 
-  defp persist_data() do
+  def persist_data() do
     Agent.get(__MODULE__, fn data ->
       File.write!(@file_path, Jason.encode!(data))
     end)
