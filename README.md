@@ -47,6 +47,9 @@ git clone https://github.com/blobbybilb/AHS-EW-SAR-dashboard
 mix deps.get
 iex -S mix
 # Now web_dashboard.py should be able to send stuff to the server (after you put in the correct server IP)
+# It will also start an interactive Elixir session, where you can enter:
+DataStore.persist_data()
+# to save data to disk (this is done to avoid frequent writes to the Micro SD and avoid wearing it out)
 ```
 
 ## Screenshots
