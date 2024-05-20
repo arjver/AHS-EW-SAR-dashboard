@@ -105,11 +105,11 @@ def plot(x: float, y: float, color: str):
     message = f"plot/{id}/{x}/{y}/{color_to_hex(color)}||".encode()
     sock.sendall(message)
 
-# time.sleep(1)
-id = "test"
-connect_web_server()
-init_plot()
-# time.sleep(1)
-plot(0, 0, "red")
-plot(1, 1, "green")
-plot(2, 2, "blue")
+# # time.sleep(1)
+# id = "test"
+# connect_web_server()
+# init_plot()
+# # time.sleep(1)
+# plot(0, 0, "red")
+# plot(1, 1, "green")
+# plot(2, 2, "blue")
