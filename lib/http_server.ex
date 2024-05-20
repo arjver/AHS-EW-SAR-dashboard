@@ -44,6 +44,26 @@ defmodule HTTPServer.Router do
     end
   end
 
+  get "/plot/:id" do
+    id = conn.params["id"]
+    data = DataStore.get(:plot, id)
+
+    if data == %{} do
+      conn |> send_resp(404, "Unknown ID")
+    else
+      xvals = data |> Map.get("x", [])
+      yvals = data |> Map.get("y", [])
+      colors = data |> Map.get("color", [])
+
+      conn
+      |> put_resp_content_type("text/html")
+      |> send_resp(
+        200,
+        WebUtils.make_plot(id, xvals, yvals, colors)
+      )
+    end
+  end
+
   match _ do
     send_resp(conn, 404, "404 Not Found")
   end

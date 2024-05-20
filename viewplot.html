@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="refresh" content="2" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Search and Report - Plot View</title>
+
+        <style>
+            body {
+                font-family: "Gill Sans", "Gill Sans MT", Calibri,
+                    "Trebuchet MS", sans-serif;
+                margin: auto;
+                margin-top: 1em;
+                max-width: 800px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="plot" width="800" height="800" style="border: 1px solid #000;"
+        ></canvas>
+        <div>
+            Your ID is: <b>__id__</b>
+            <br />
+        </div>
+    </body>
+
+    <script>
+        function plotData(x_vals, y_vals, colors) {
+            const plot = document.getElementById("plot").getContext("2d");
+
+            const x_max = Math.max(...x_vals) + 2;
+            const x_min = Math.min(...x_vals) - 2;
+            const y_max = Math.max(...y_vals) + 2;
+            const y_min = Math.min(...y_vals) - 2;
+
+            const x_scale = plot.canvas.width / (x_max - x_min);
+            const y_scale = plot.canvas.height / (y_max - y_min);
+
+            plot.strokeStyle = "#000";
+            plot.lineWidth = 1;
+            plot.beginPath();
+            plot.moveTo((0 - x_min) * x_scale, 0);
+            plot.lineTo((0 - x_min) * x_scale, plot.canvas.height);
+            plot.moveTo(0, plot.canvas.height - (0 - y_min) * y_scale);
+            plot.lineTo(plot.canvas.width, plot.canvas.height - (0 - y_min) * y_scale);
+            plot.stroke();
+
+            for (let i = 0; i < x_vals.length; i++) {
+                const x = (x_vals[i] - x_min) * x_scale;
+                const y = plot.canvas.height - (y_vals[i] - y_min) * y_scale;
+
+                plot.fillStyle = colors[i];
+                plot.beginPath();
+                plot.arc(x, y, 5, 0, 2 * Math.PI);
+                plot.fill();
+            }
+        }
+
+        const x_vals = "__x_vals__".split(",");
+        const y_vals = "__y_vals__".split(",");
+        const colors = "__colors__".split(",");
+        plotData(x_vals, y_vals, colors);
+
+        // const x_vals = [0, 1, 2, 3, 4, 5];
+        // const y_vals = [0, 1, 4, 9, 16, 25];
+        // const colors = ["#f00", "#0f0", "#00f", "#ff0", "#0ff", "#f0f"];
+        // plotData(x_vals, y_vals, colors);
+    </script>
+</html>

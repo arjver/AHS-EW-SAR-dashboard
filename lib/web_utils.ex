@@ -1,6 +1,7 @@
 defmodule WebUtils do
   @grid_page File.read!("viewgrid.html")
   @log_page File.read!("viewlog.html")
+  @plot_page File.read!("viewplot.html")
 
   def row_to_tr(row) do
     "<tr>" <> (row |> Enum.map(fn cell -> "<td #{cell}></td>" end) |> Enum.join()) <> "</tr>"
@@ -30,6 +31,17 @@ defmodule WebUtils do
 
     @log_page
     |> String.replace("__log__", log)
+    |> String.replace("__id__", id)
+  end
+
+  def make_plot(id, xvals, yvals, colors) do
+    xvals_csv = Enum.join(xvals, ",")
+    yvals_csv = Enum.join(yvals, ",")
+    colors_csv = Enum.join(colors, ",")
+    @plot_page
+    |> String.replace("__x_vals__", xvals_csv)
+    |> String.replace("__y_vals__", yvals_csv)
+    |> String.replace("__colors__", colors_csv)
     |> String.replace("__id__", id)
   end
 end

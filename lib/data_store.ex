@@ -14,6 +14,10 @@ defmodule DataStore do
     Agent.get(__MODULE__, fn data -> data |> Map.get("log", %{}) |> Map.get(key, []) end)
   end
 
+  def get(:plot, key) do
+    Agent.get(__MODULE__, fn data -> data |> Map.get("plot", %{}) |> Map.get(key, %{}) end)
+  end
+
   def put(:grid, key, value) do
     Agent.update(__MODULE__, fn data ->
       grid_data = data |> Map.get("grid", %{})
@@ -31,6 +35,14 @@ defmodule DataStore do
     end)
   end
 
+  def put(:plot, key, value) do
+    Agent.update(__MODULE__, fn data ->
+      plot_data = data |> Map.get("plot", %{})
+      replace_at_key = plot_data |> Map.put(key, value)
+      data |> Map.put("plot", replace_at_key)
+    end)
+  end
+
   def init_grid(id, height, width) do
     grid = for _ <- 1..height, do: for(_ <- 1..width, do: "")
     put(:grid, id, grid)
@@ -40,6 +52,11 @@ defmodule DataStore do
     put(:log, id, [
       [Helpers.get_time(), "Logging initialized on id #{id}"]
     ])
+  end
+
+  def init_plot(id) do
+    put(:plot, id, %{})
+    plot_point(id, 0, 0, "#555")
   end
 
   def set_grid(id, x, y, to) do
@@ -54,6 +71,20 @@ defmodule DataStore do
     new = get(:log, id) ++ [[Helpers.get_time(), msg]]
     put(:log, id, new)
   end
+
+  def plot_point(id, x, y, color) do
+    data = get(:plot, id)
+    x_data = data |> Map.get("x", [])
+    y_data = data |> Map.get("y", [])
+    color_data = data |> Map.get("color", [])
+    put(:plot, id, %{
+      "x" => x_data ++ [x],
+      "y" => y_data ++ [y],
+      "color" => color_data ++ [color]
+      })
+    IO.puts("#{inspect(get(:plot, id))}")
+  end
+
 
   defp load_data() do
     case File.read(@file_path) do

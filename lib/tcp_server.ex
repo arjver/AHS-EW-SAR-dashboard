@@ -10,6 +10,7 @@ defmodule TCPServer do
         reuseaddr: true,
         ip: {0, 0, 0, 0}
       ])
+
     IO.puts("Starting TCP server on port #{@port}")
     accept_loop(listener)
   end
@@ -25,6 +26,8 @@ defmodule TCPServer do
 
     case :gen_tcp.recv(client, 0) do
       {:ok, data} ->
+        IO.inspect(data)
+
         IO.puts("Received: #{inspect(data)}")
 
         data |> String.split("||", trim: true) |> Enum.each(&do_action/1)
@@ -43,6 +46,12 @@ defmodule TCPServer do
     end
   end
 
+  defp float!(float_str) do
+    case(Float.parse(float_str)) do
+      {float, _} -> float
+    end
+  end
+
   defp do_action(data) do
     case(data |> String.split("/")) do
       ["set", id, x, y, to] ->
@@ -56,6 +65,12 @@ defmodule TCPServer do
 
       ["log", id, msg] ->
         DataStore.add_log(id, msg)
+
+      ["plot", id, x, y, color] ->
+        DataStore.plot_point(id, float!(x), float!(y), "#" <> color)
+
+      ["init", "plot", id] ->
+        DataStore.init_plot(id)
 
       _ ->
         IO.puts("Unmatched: #{data}")
