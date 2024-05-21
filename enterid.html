@@ -56,6 +56,7 @@
             <input type="text" placeholder="Enter your ID here" />
             <button id="gridbutton">View Grid</button>
             <button id="logbutton">View Log</button>
+            <button id="plotbutton">View Plot</button>
             <small>
                 *We're not actually "rescue"ing so it should be report or
                 something...
@@ -78,6 +79,13 @@
                 const text = textInput.value;
                 if (text) {
                     window.location.href = "/logs/" + encodeURIComponent(text);
+                }
+            });
+
+            plotButton.addEventListener("click", function () {
+                const text = textInput.value;
+                if (text) {
+                    window.location.href = "/plot/" + encodeURIComponent(text);
                 }
             });
 
