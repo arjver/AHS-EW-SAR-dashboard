@@ -16,7 +16,7 @@ Moved to https://github.com/ahspc/AHS-EW-SAR-dashboard for collaboration/mainten
 - Also provides a simple log over wifi for debugging without being connected to serial
 - Provides a helper library (`web_dashboard.py`) for sending data to the web interface
 
-Made by [@blobbybilb](https://github.com/blobbybilb)
+Made by [Arjun (@arjver)](https://github.com/arjver)
 
 ## Technical Stuff 
 *mostly for whomever maintainership of this goes to after I graduate*
@@ -24,7 +24,7 @@ Made by [@blobbybilb](https://github.com/blobbybilb)
 - The school blocks UDP on AFAIK every port (not that I want to implement retransmissions, etc. anyway)
 - The school sometimes blocks inbound TCP packets (and not outbound)
 - The school randomly blocks domains (via DNS (but it seems some IPs are blocked at a different level?))
-- The school has several network, the rules are different for each (as I found out during 6th Period (AP CSA) 14.Feb.2024)
+- The school has several networks, the rules are different for each (as I found out during 6th Period (AP CSA) 14.Feb.2024)
 - All the above statements may or may not be accurate, so please don't modify the setup unless needed. It's okay. Rewriting it in Rust won't make the network any faster. Well don't say I didn't warn you.
 - MicroPython doesn't support WPA2 Enterprise which is what the student wifi uses as of when I wrote this
 ### The Setup:
